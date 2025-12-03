@@ -2,6 +2,8 @@ const canvas = document.getElementById("canvas");
 const gl = canvas.getContext("webgl");
 const worker = new Worker("worker.js");
 
+console.log(window.Worker);
+
 main();
 
 function main() {
