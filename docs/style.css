@@ -2,7 +2,7 @@
     color-scheme: light dark;
     --main-bg-color: light-dark(rgb(224, 224, 224), rgb(32, 32, 32));
     --main-fg-color: light-dark(rgb(192, 192, 192), rgb(64, 64, 64));
-    --main-txt-color: lihgt-dark(rgb(32, 32, 32), rgb(224, 224, 224));
+    --main-txt-color: lihgt-dark(rgb(32, 32, 32), rgb(255, 224, 224));
 
     touch-action: none;
     background-color: var(--main-bg-color);
