@@ -57,6 +57,7 @@
 }
 
 .circle-button {
+    touch-action: manipulation;
     width: 5%;
     min-width: 32px;
     max-width: 48px;
