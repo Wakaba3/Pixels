@@ -21,6 +21,9 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    max-width: 95%;
+    max-height: 95%;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
     border: thin solid var(--main-fg-color);
     border-radius: 10px;
@@ -53,17 +56,13 @@
 }
 
 .circle-button {
-    float: left;
     width: 5%;
-    height: auto;
     min-width: 32px;
-    min-height: 32px;
     max-width: 48px;
-    max-height: 48px;
     aspect-ratio: 1 / 1;
     margin: 0.5%;
     text-align: center;
-    font: 150% serif;
+    font: 100% sans-serif;
     color: var(--main-font-color);
     overflow: hidden;
     border: thin solid var(--main-fg-color);
