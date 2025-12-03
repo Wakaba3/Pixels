@@ -13,8 +13,8 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 97.5%;
-    height: 97.5%;
+    width: 95%;
+    height: 95%;
 }
 
 #canvas {
@@ -22,8 +22,8 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    max-width: 95%;
-    max-height: 95%;
+    max-width: 99%;
+    max-height: 99%;
     aspect-ratio: 1 / 1;
     overflow: hidden;
     border: thin solid var(--main-fg-color);
@@ -54,6 +54,7 @@
 
 .generic-button {
     touch-action: manipulation;
+    width: 10%;
     min-width: 48px;
     max-width: 64px;
     aspect-ratio: 1 / 1;
