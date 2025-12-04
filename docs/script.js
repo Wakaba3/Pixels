@@ -60,11 +60,16 @@ function loadShaderProgram(gl, vsUrl, fsUrl) {
 
             if (gl.getProgramParameter(shaderProgram, gl.LINK_STATUS))
                 return shaderProgram; // Successful
-        } catch (error) {}
+        } catch (error) {
+
+        }
     }
     
-    console.error("Failed to initialize the shader program:", gl.getProgramInfoLog(shaderProgram));
+    console.error("Failed to initialize the shader program");
     gl.deleteProgram(shaderProgram);
+
+    console.error("Vertex shader: ", vertexShader);
+    console.error("Fragment shader: ", fragmentShader);
 
     return null;
 }
@@ -79,7 +84,7 @@ async function loadShader(gl, type, url) {
         gl.compileShader(shader);
 
         if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-            console.error("Failed to complie the shader:", gl.getShaderInfoLog(shader));
+            console.error("Failed to complie the shader: ", gl.getShaderInfoLog(shader));
             gl.deleteShader(shader);
             
             return null;
@@ -99,7 +104,7 @@ async function loadShaderSource(url) {
             return source;
     } catch (error) {}
 
-    console.error("Failed to load the shader source:", url);
+    console.error("Failed to load the shader source: ", url);
     
     return "";
 }
