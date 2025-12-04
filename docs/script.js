@@ -64,7 +64,7 @@ function loadShaderProgram(gl, vsUrl, fsUrl) {
     }
     
     console.error("Failed to initialize the shader program:", gl.getProgramInfoLog(shaderProgram));
-    gl.deletePrgoram(shaderProgram);
+    gl.deleteProgram(shaderProgram);
 
     return null;
 }

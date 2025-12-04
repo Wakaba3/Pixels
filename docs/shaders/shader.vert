@@ -1,9 +1,9 @@
-attribute vec4 position;
-attribute vec4 color;
+attribute vec4 aPosition;
+attribute vec4 aColor;
 
-varying vec4 outColor;
+varying lowp vec4 vColor;
 
 void main() {
-    gl_Position = position;
-    outColor = color;
+    gl_Position = aPosition;
+    vColor = aColor;
 }
