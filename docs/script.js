@@ -60,9 +60,7 @@ function loadShaderProgram(gl, vsUrl, fsUrl) {
 
             if (gl.getProgramParameter(shaderProgram, gl.LINK_STATUS))
                 return shaderProgram; // Successful
-        } catch (error) {
-
-        }
+        } catch (error) {}
     }
     
     console.error("Failed to initialize the shader program");
