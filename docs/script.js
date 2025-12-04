@@ -43,14 +43,14 @@ function initWebGL(canvas) {
     return gl;
 }
 
-function loadShaderProgram(gl, vsUrl, fsUrl) {
+async function loadShaderProgram(gl, vsUrl, fsUrl) {
     if (!gl)
         return null;
 
     const shaderProgram = gl.createProgram();
 
-    loadShader(gl, gl.VERTEX_SHADER, vsUrl).then(vertexShader => gl.attachShader(shaderProgram, vertexShader));
-    loadShader(gl, gl.FRAGMENT_SHADER, fsUrl).then(fragmentShader => gl.attachShader(shaderProgram, fragmentShader));
+    await loadShader(gl, gl.VERTEX_SHADER, vsUrl).then(vertexShader => gl.attachShader(shaderProgram, vertexShader));
+    await loadShader(gl, gl.FRAGMENT_SHADER, fsUrl).then(fragmentShader => gl.attachShader(shaderProgram, fragmentShader));
     
     gl.linkProgram(shaderProgram);
     if (gl.getProgramParameter(shaderProgram, gl.LINK_STATUS))
