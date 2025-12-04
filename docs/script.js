@@ -4,6 +4,10 @@ const gl = initWebGL(canvas);
 
 const shaderProgram = loadShaderProgram(gl, "shaders/shader.vert", "shaders/shader.frag");
 
+shaderProgram.then(program => {
+    console.log("Shader program loaded: ", program);
+});
+
 const undo = document.getElementById("undo");
 const redo = document.getElementById("redo");
 
