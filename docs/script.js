@@ -53,12 +53,14 @@ function loadShaderProgram(gl, vsUrl, fsUrl) {
     const shaderProgram = gl.createProgram();
 
     if (vertexShader && fragmentShader) {
-        gl.attachShader(shaderProgram, vertexShader);
-        gl.attachShader(shaderProgram, fragmentShader);
-        gl.linkProgram(shaderProgram);
+        try {
+            gl.attachShader(shaderProgram, vertexShader);
+            gl.attachShader(shaderProgram, fragmentShader);
+            gl.linkProgram(shaderProgram);
 
-        if (gl.getProgramParameter(shaderProgram, gl.LINK_STATUS))
-            return shaderProgram; // Successful
+            if (gl.getProgramParameter(shaderProgram, gl.LINK_STATUS))
+                return shaderProgram; // Successful
+        } catch (error) {}
     }
     
     console.error("Failed to initialize the shader program:", gl.getProgramInfoLog(shaderProgram));
