@@ -27,7 +27,7 @@ canvas.addEventListener("pointerdown", startDrawing);
 canvas.addEventListener("pointermove", updateDrawing);
 canvas.addEventListener("pointerup", finishDrawing);
 
-//Execute
+// Execute
 main();
 
 function main() {
@@ -37,7 +37,7 @@ function initWebGL(canvas) {
     const gl = canvas.getContext("webgl");
 
     if (!gl) {
-        console.error("Unable to initialize WebGL. Your browser or machine may not support it.");
+        console.error("Failed to initialize WebGL. Your browser or machine may not support it.");
     }
 
     return gl;
@@ -51,16 +51,20 @@ function loadShaderProgram(gl, vsUrl, fsUrl) {
     const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsUrl);
 
     const shaderProgram = gl.createProgram();
-    gl.attachShader(shaderProgram, vertexShader);
-    gl.attachShader(shaderProgram, fragmentShader);
-    gl.linkProgram(shaderProgram);
-    
-    if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
-        console.error("Unable to initialize the shader program:", gl.getProgramInfoLog(shaderProgram));
-        return null;
-    }
 
-    return shaderProgram;
+    if (vertexShader && fragmentShader) {
+        gl.attachShader(shaderProgram, vertexShader);
+        gl.attachShader(shaderProgram, fragmentShader);
+        gl.linkProgram(shaderProgram);
+
+        if (gl.getProgramParameter(shaderProgram, gl.LINK_STATUS))
+            return shaderProgram; // Successful
+    }
+    
+    console.error("Failed to initialize the shader program:", gl.getProgramInfoLog(shaderProgram));
+    gl.deletePrgoram(shaderProgram);
+
+    return null;
 }
 
 async function loadShader(gl, type, url) {
@@ -73,8 +77,9 @@ async function loadShader(gl, type, url) {
         gl.compileShader(shader);
 
         if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-            console.error("An error occurred compiling the shaders:", gl.getShaderInfoLog(shader));
+            console.error("Failed to complie the shader:", gl.getShaderInfoLog(shader));
             gl.deleteShader(shader);
+            
             return null;
         }
 
@@ -86,12 +91,15 @@ async function loadShader(gl, type, url) {
 
 async function loadShaderSource(url) {
     try {
-        const response = await fetch(url);
-        return await response.text();
-    } catch (error) {
-        console.error("Failed to load shader:", url);
-        return "";
-    }
+        const source = (await fetch(url)).text();
+
+        if (source)
+            return source;
+    } catch (error) {}
+
+    console.error("Failed to load the shader source:", url);
+    
+    return "";
 }
 
 function addActivity(event) {
