@@ -60,9 +60,6 @@ function loadShaderProgram(gl, vsUrl, fsUrl) {
     console.error("Failed to initialize the shader program");
     gl.deleteProgram(shaderProgram);
 
-    console.error("Vertex shader: ", vertexShader);
-    console.error("Fragment shader: ", fragmentShader);
-
     return null;
 }
 
