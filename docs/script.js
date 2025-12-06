@@ -129,6 +129,10 @@ function continueDraggingPopup(event) {
 function finishDraggingPopup(event) {
     if (draggingPopup) {
         draggingPopup = false;
+
+        popupOffsetX = 0;
+        popupOffsetY = 0;
+
         locatePopup(event.pageX, event.pageY);
     }
 }
