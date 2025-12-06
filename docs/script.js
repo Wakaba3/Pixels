@@ -4,18 +4,8 @@ const vctx = view.getContext("2d");
 const undo = document.getElementById("undo");
 const redo = document.getElementById("redo");
 
-//Popup
-const popup = document.getElementById("popup");
-const popupBar = document.getElementById("popup-bar");
-const popupTitle = document.getElementById("popup-title");
-const popupContent = document.getElementById("popup-content");
-let popupX = 0;
-let popupY = 0;
-let popupWidth = 0;
-let popupHeight = 0;
-let popupOffsetX = 0;
-let popupOffsetY = 0;
-let draggingPopup = false;
+// Register popups
+new Popup("file-popup", "File");
 
 // Activity
 const MAX_ACTIVITIES = 64;
@@ -53,15 +43,9 @@ addEventListener("contextmenu", event => event.preventDefault(), { passive: fals
 // Prevent touch scrolling
 addEventListener("toutchmove", event => event.preventDefault(), { passive: false });
 
-window.addEventListener("resize", event => locatePopup());
-
 view.addEventListener("pointerdown", startDrawing);
 view.addEventListener("pointermove", continueDrawing);
 view.addEventListener("pointerup", finishDrawing);
-
-popupBar.addEventListener("pointerdown", startDraggingPopup);
-addEventListener("pointermove", continueDraggingPopup);
-addEventListener("pointerup", finishDraggingPopup);
 
 function main() {
     if (timer)
@@ -82,75 +66,6 @@ function updateElements() {
     redo.disabled = activityIndex >= activities.length;
 
     updateView();
-}
-
-function openOrClosePopup(name, width, height) {
-    if (popup.classList.contains("popup-disabled")) {
-        openPopup(name, width, height);
-    } else {
-        closePopup();
-    }
-}
-
-function openPopup(name, width, height) {
-    if (popup.classList.contains("popup-enabled"))
-        closePopup();
-
-    popup.classList.remove("popup-disabled");
-    popup.classList.add("popup-enabled");
-    popupTitle.textContent = name;
-
-    locatePopup();
-    resizePopup(width, height);
-}
-
-function closePopup() {
-    popup.classList.remove("popup-enabled");
-    popup.classList.add("popup-disabled");
-}
-
-function startDraggingPopup(event) {
-    if (!draggingPopup && event.target.id === popupBar.id) {
-        draggingPopup  = true;
-
-        popupOffsetX = parseInt(popup.style.left) - event.pageX;
-        popupOffsetY = parseInt(popup.style.top) - event.pageY;
-
-        locatePopup(event.pageX, event.pageY);
-    }
-}
-
-function continueDraggingPopup(event) {
-    if (draggingPopup) {
-        locatePopup(event.pageX, event.pageY);
-    }
-}
-
-function finishDraggingPopup(event) {
-    if (draggingPopup) {
-        draggingPopup = false;
-
-        locatePopup(event.pageX, event.pageY);
-
-        popupOffsetX = 0;
-        popupOffsetY = 0;
-    }
-}
-
-function locatePopup(x, y) {
-    popupX = Number.isFinite(x) ? x : window.scrollX + window.innerWidth / 2;
-    popupY = Number.isFinite(y) ? y : window.scrollY + window.innerHeight / 2;
-
-    popup.style.left = (popupX + popupOffsetX) + "px";
-    popup.style.top = (popupY + popupOffsetY) + "px";
-}
-
-function resizePopup(width, height) {
-    popupWidth = Number.isFinite(width) ? width : 300;
-    popupHeight = Number.isFinite(height) ? height : 300;
-    
-    popup.style.width = popupWidth + "px";
-    popup.style.height = popupHeight + "px";
 }
 
 function updateView() {
