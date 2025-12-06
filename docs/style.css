@@ -89,7 +89,7 @@
 }
 
 .popup {
-    pointer-events: none;
+    pointer-events: auto;
     touch-action: none;
     -webkit-user-select: none;
     user-select: none;
@@ -147,10 +147,6 @@
 .popup-close:active {
     background-color: red;
     transition: background-color 0s;
-}
-
-.popup-content {
-    pointer-events: auto;
 }
 
 .borderless-button {

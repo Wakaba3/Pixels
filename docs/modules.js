@@ -37,7 +37,6 @@ class Popup {
         this.#bar.classList.add("popup-bar");
         this.#title.classList.add("popup-title");
         this.#close.classList.add("popup-close");
-        this.#content.classList.add("popup-content");
 
         this.#close.setAttribute("translate", "no");
 
